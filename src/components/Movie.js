@@ -1,16 +1,20 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import styles from "./Movie.module.css";
 
-function Movie({ coverImg, title, rating, summary, genres, id }) {
+function Movie({ coverImg, title, rating, summary, year, genres, id }) {
   return (
-    <div>
-      <img src={coverImg} alt={title} />
-      <h2>
+    <div className={styles.movie}>
+      <img src={coverImg} alt={title} className={styles.movie__img} />
+      <h2 className={styles.movie__title}>
         <Link to={`/movie/${id}`}>{title}</Link>
       </h2>
-      <h3>Rating: {rating}</h3>
-      <p>{summary}</p>
-      <ul>{genres && genres.map((genre) => <li key={genre}>{genre}</li>)}</ul>
+      <h3 className={styles.movie__year}>Year: {year}</h3>
+      <h3 className={styles.movie__rating}>Rating: {rating}</h3>
+      <p>{summary.length > 250 ? `${summary.slice(0, 250)}...` : summary}</p>
+      <ul className={styles.movie__genres}>
+        {genres && genres.map((genre) => <li key={genre}>{genre}</li>)}
+      </ul>
     </div>
   );
 }
